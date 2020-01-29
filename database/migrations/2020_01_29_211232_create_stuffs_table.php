@@ -14,11 +14,10 @@ class CreateStuffsTable extends Migration
     public function up()
     {
         Schema::create('stuffs', function (Blueprint $table) {
-            $table->engine = 'InnoDB';
             $table->bigIncrements('id');
-            $table->string('first_name', 50);
-            $table->string('last_name', 50);
-            $table->string('email')->unique();
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('email');
             $table->string('password');
             $table->timestamps();
         });

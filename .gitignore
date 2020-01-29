@@ -11,8 +11,5 @@ Homestead.yaml
 npm-debug.log
 yarn-error.log
 
-# phpstorm project files
 .idea
-
-# netbeans project files
 nbproject
