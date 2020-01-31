@@ -1,3 +1,5 @@
 <?php
 
-Route::resource('stuffs', 'StuffController');
+Route::get('/stuff/{id}', [
+    'uses' => 'StuffController@show',
+]);
