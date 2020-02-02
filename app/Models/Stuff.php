@@ -1,0 +1,24 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Stuff extends Model
+{
+    /** @var string  */
+    protected $table = 'stuffs';
+
+    /** @var array  */
+    protected $fillable = [
+        'first_name',
+        'last_name',
+        'email',
+        'password',
+    ];
+
+    /** @var array  */
+    protected $hidden = [
+        'password'
+    ];
+}
