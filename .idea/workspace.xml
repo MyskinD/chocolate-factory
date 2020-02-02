@@ -2,15 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ffa45dd3-112c-450d-b4f2-d5facc018f87" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Api/Repositories/StuffRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Api/Repositories/StuffRepositoryInterface.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Api/Services/StuffService.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Api/Validations/StuffValidation.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Api/Validations/Validation.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/StuffController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/debugbar/X002f77326e53914687c487cdcb71e199.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/debugbar/X0988b802f8b6a00bffb86cdd68d9d9e7.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/debugbar/X36580fb2ed706db71dea6eb820b9a741.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/debugbar/X6f0caf92d5ae9a48b6dd06da275b3381.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/debugbar/X86c1a30e0ef8185982a008dbef8fd565.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/debugbar/X8e0dc79c7c8b843be622ad103aa38bf9.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/debugbar/Xa9a22c2736cb9ef004f1b475d4059f7f.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/debugbar/Xaf00cc0874d6c6588558ec31994c3442.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/debugbar/Xb0d722b282d4394aa44f3df13b955861.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/debugbar/Xb6379993f1a9b03b7c337e15951b2651.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/debugbar/Xc393b0dbd56ed83a2ad3c306953fd587.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/debugbar/Xc6d67ed2b07980dd16f03d141ff89b96.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/debugbar/Xd53d05d6a6a1f6734b4f738592a144b7.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/debugbar/Xda9e1910d4717e037bf0340c442f36f6.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/debugbar/Xdb51e076c15d4d1328e93b2e3fc30e34.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/debugbar/Xe16878eb0051c4a8256788dafaf4dd56.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/debugbar/Xf92a9a99449517cbab243f5f70a0269a.json" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -132,11 +142,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Stuff.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Stuff.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Models/Stuff.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="13" column="21" lean-forward="true" selection-start-line="13" selection-start-column="21" selection-end-line="13" selection-end-column="21" />
+            <state relative-caret-position="396">
+              <caret line="22" column="6" lean-forward="true" selection-start-line="22" selection-start-column="6" selection-end-line="22" selection-end-column="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
             </state>
           </provider>
         </entry>
@@ -173,6 +192,7 @@
         <option value="$PROJECT_DIR$/app/Http/Controllers/Api/StuffController.php" />
         <option value="$PROJECT_DIR$/app/Api/Repositories/StuffRepository.php" />
         <option value="$PROJECT_DIR$/app/Api/Services/StuffService.php" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -297,77 +317,7 @@
             <path>
               <item name="chocolate-factory.loc" type="b2602c69:ProjectViewProjectNode" />
               <item name="chocolate-factory.loc" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="chocolate-factory.loc" type="b2602c69:ProjectViewProjectNode" />
-              <item name="chocolate-factory.loc" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="Api" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="chocolate-factory.loc" type="b2602c69:ProjectViewProjectNode" />
-              <item name="chocolate-factory.loc" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="Api" type="462c0819:PsiDirectoryNode" />
-              <item name="Repositories" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="chocolate-factory.loc" type="b2602c69:ProjectViewProjectNode" />
-              <item name="chocolate-factory.loc" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="Api" type="462c0819:PsiDirectoryNode" />
-              <item name="Services" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="chocolate-factory.loc" type="b2602c69:ProjectViewProjectNode" />
-              <item name="chocolate-factory.loc" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="Api" type="462c0819:PsiDirectoryNode" />
-              <item name="Validations" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="chocolate-factory.loc" type="b2602c69:ProjectViewProjectNode" />
-              <item name="chocolate-factory.loc" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="Http" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="chocolate-factory.loc" type="b2602c69:ProjectViewProjectNode" />
-              <item name="chocolate-factory.loc" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="Http" type="462c0819:PsiDirectoryNode" />
-              <item name="Controllers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="chocolate-factory.loc" type="b2602c69:ProjectViewProjectNode" />
-              <item name="chocolate-factory.loc" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="Http" type="462c0819:PsiDirectoryNode" />
-              <item name="Controllers" type="462c0819:PsiDirectoryNode" />
-              <item name="Api" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="chocolate-factory.loc" type="b2602c69:ProjectViewProjectNode" />
-              <item name="chocolate-factory.loc" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="Models" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="chocolate-factory.loc" type="b2602c69:ProjectViewProjectNode" />
-              <item name="chocolate-factory.loc" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="Providers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="chocolate-factory.loc" type="b2602c69:ProjectViewProjectNode" />
-              <item name="chocolate-factory.loc" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="chocolate-factory.loc" type="b2602c69:ProjectViewProjectNode" />
-              <item name="chocolate-factory.loc" type="462c0819:PsiDirectoryNode" />
-              <item name="routes" type="462c0819:PsiDirectoryNode" />
+              <item name="storage" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -416,11 +366,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15721000" />
+    <option name="totallyTimeSpent" value="16346000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
@@ -567,13 +516,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Requests/StuffRequest.php" />
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="13" column="5" lean-forward="true" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/composer.json">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -789,8 +731,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Models/Stuff.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="13" column="21" lean-forward="true" selection-start-line="13" selection-start-column="21" selection-end-line="13" selection-end-column="21" />
+        <state relative-caret-position="396">
+          <caret line="22" column="6" lean-forward="true" selection-start-line="22" selection-start-column="6" selection-end-line="22" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
         </state>
       </provider>
     </entry>
