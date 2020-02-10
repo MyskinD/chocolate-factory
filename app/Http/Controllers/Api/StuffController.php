@@ -8,21 +8,33 @@ use Exception;
 
 class StuffController
 {
+    /** @var StuffService  */
     protected $stuffService;
 
+    /**
+     * StuffController constructor.
+     * @param StuffService $stuffService
+     */
     public function __construct(StuffService $stuffService)
     {
         $this->stuffService = $stuffService;
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function create(Request $request)
     {
         $data = $request->input();
 
         try {
-            $stuff = $this->stuffService->createStuff($data);
+            $newStuff = $this->stuffService->createStuff($data);
+
+            return response()->json($newStuff, 201);
         } catch(Exception $exception) {
 
+            return response()->json($exception->getMessage(), 400);
         }
     }
 }

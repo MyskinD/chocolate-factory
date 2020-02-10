@@ -1,5 +1,5 @@
 <?php
 
-Route::post('/stuff', [
-    'uses' => 'Api\StuffController@create',
-]);
+Route::namespace('Api')->group(function () {
+    Route::post('/stuffs', 'StuffController@create')->name('stuff.create');
+});

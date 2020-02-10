@@ -2,22 +2,22 @@
 
 namespace App\Api\Repositories;
 
-use Illuminate\Support\Facades\DB;
+use App\Models\Stuff;
 
 class StuffRepository implements StuffRepositoryInterface
 {
-    protected $db;
-
-    public function __construct(DB $db)
-    {
-        $this->db = $db;
-    }
-
+    /**
+     * @return mixed|void
+     */
     public function all()
     {
         // TODO: Implement all() method.
     }
 
+    /**
+     * @param int $id
+     * @return mixed|void
+     */
     public function get(int $id)
     {
         // TODO: Implement get() method.
@@ -25,22 +25,34 @@ class StuffRepository implements StuffRepositoryInterface
 
     /**
      * @param array $data
+     * @return Stuff
      */
-    public function add(array $data):void
+    public function add(array $data): Stuff
     {
-        $this->db::table('stuffs')->insert([
-            'first_name' => $data['first_name'],
-            'last_name' => $data['last_name'],
-            'email' => $data['email'],
-            'password' => $data['password']
-        ]);
+        $stuff = new Stuff();
+        $stuff->first_name = $data['first_name'];
+        $stuff->last_name = $data['last_name'];
+        $stuff->email = $data['email'];
+        $stuff->password = md5($data['password']);
+        $stuff->save();
+
+        return $stuff;
     }
 
+    /**
+     * @param int $id
+     * @param array $data
+     * @return mixed|void
+     */
     public function save(int $id, array $data)
     {
         // TODO: Implement save() method.
     }
 
+    /**
+     * @param int $id
+     * @return mixed|void
+     */
     public function remove(int $id)
     {
         // TODO: Implement remove() method.

@@ -4,6 +4,8 @@ namespace App\Api\Services;
 
 use App\Api\Repositories\StuffRepositoryInterface;
 use App\Api\Validations\StuffValidation;
+use App\Models\Stuff;
+use \Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class StuffService
 {
@@ -28,11 +30,17 @@ class StuffService
 
     /**
      * @param array $data
+     * @return Stuff
      */
-    public function createStuff(array $data)
+    public function createStuff(array $data): Stuff
     {
         $this->stuffValidation->validateOnCreate($data);
-        $this->stuffRepository->add($data);
+        $newStuff = $this->stuffRepository->add($data);
 
+        if (is_null($newStuff)) {
+            throw new NotFoundHttpException('Stuff was not created');
+        }
+
+        return $newStuff;
     }
 }
