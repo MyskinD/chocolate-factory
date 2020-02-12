@@ -2,9 +2,9 @@
 
 namespace App\Api\Repositories;
 
-use App\Models\Stuff;
+use App\Models\Api\v1\Stuff;
 
-interface StuffRepositoryInterface
+interface RepositoryInterface
 {
     /**
      * @return mixed

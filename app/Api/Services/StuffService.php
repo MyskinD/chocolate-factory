@@ -2,14 +2,15 @@
 
 namespace App\Api\Services;
 
-use App\Api\Repositories\StuffRepositoryInterface;
+use App\Api\Repositories\RepositoryInterface;
+use App\Api\Repositories\StuffRepositoryCreator;
 use App\Api\Validations\StuffValidation;
-use App\Models\Stuff;
+use App\Models\Api\v1\Stuff;
 use \Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class StuffService
 {
-    /** @var StuffRepositoryInterface  */
+    /** @var RepositoryInterface  */
     protected $stuffRepository;
 
     /** @var StuffValidation  */
@@ -17,23 +18,20 @@ class StuffService
 
     /**
      * StuffService constructor.
-     * @param StuffRepositoryInterface $stuffRepository
      * @param StuffValidation $stuffValidation
      */
-    public function __construct(
-        StuffRepositoryInterface $stuffRepository,
-        StuffValidation $stuffValidation
-    ) {
-        $this->stuffRepository = $stuffRepository;
+    public function __construct(StuffValidation $stuffValidation) {
         $this->stuffValidation = $stuffValidation;
     }
 
     /**
      * @param array $data
+     * @param string $vApi
      * @return Stuff
      */
-    public function createStuff(array $data): Stuff
+    public function createStuff(array $data, string $vApi): Stuff
     {
+        $this->stuffRepository = (new StuffRepositoryCreator())->get($vApi);
         $this->stuffValidation->validateOnCreate($data);
         $newStuff = $this->stuffRepository->add($data);
 

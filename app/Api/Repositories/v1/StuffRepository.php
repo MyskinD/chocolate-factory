@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Api\Repositories;
+namespace App\Api\Repositories\v1;
 
-use App\Models\Stuff;
+use App\Api\Repositories\RepositoryInterface;
+use App\Models\Api\v1\Stuff;
 
-class StuffRepository implements StuffRepositoryInterface
+class StuffRepository implements RepositoryInterface
 {
     /**
      * @return mixed|void

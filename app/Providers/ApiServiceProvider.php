@@ -14,8 +14,8 @@ class ApiServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(
-            \App\Api\Repositories\StuffRepositoryInterface::class,
-            \App\Api\Repositories\StuffRepository::class
+            \App\Api\Repositories\RepositoryInterface::class,
+            \App\Api\Repositories\v1\StuffRepository::class
         );
     }
 

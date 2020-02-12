@@ -29,9 +29,12 @@ class StuffController
     public function create(Request $request)
     {
         $data = $request->input();
+        $contentType = $request->headers->get('content-type');
+        $apiData = explode('+', last(explode('/', $contentType)));
+        $vApi = array_shift($apiData);
 
         try {
-            $newStuff = $this->stuffService->createStuff($data);
+            $newStuff = $this->stuffService->createStuff($data, $vApi);
 
             return response()->json($newStuff, 201);
         } catch (BadRequestHttpException $exception) {
