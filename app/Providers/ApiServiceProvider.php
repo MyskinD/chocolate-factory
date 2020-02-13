@@ -6,6 +6,8 @@ use Illuminate\Support\ServiceProvider;
 
 class ApiServiceProvider extends ServiceProvider
 {
+    const VERSION_API_V1 = 'v1';
+
     /**
      * Register services.
      *
@@ -13,10 +15,17 @@ class ApiServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(
-            \App\Api\Repositories\RepositoryInterface::class,
-            \App\Api\Repositories\v1\StuffRepository::class
-        );
+        switch ($this->getVersionApi()) {
+            case self::VERSION_API_V1:
+                $this->app->bind(
+                    \App\Api\Repositories\StuffRepositoryInterface::class,
+                    \App\Api\Repositories\V1StuffRepository::class
+                );
+                $this->app->bind(
+                    \App\Api\Services\StuffServiceInterface::class,
+                    \App\Api\Services\V1StuffService::class
+                );
+        }
     }
 
     /**
@@ -27,5 +36,16 @@ class ApiServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+    }
+
+    /**
+     * @return string
+     */
+    private function getVersionApi(): string
+    {
+        $contentType = request()->headers->get('content-type');
+        $apiData = explode('+', last(explode('/', $contentType)));
+
+        return array_shift($apiData);
     }
 }

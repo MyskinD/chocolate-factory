@@ -4,7 +4,7 @@ namespace App\Api\Repositories;
 
 use App\Models\Api\v1\Stuff;
 
-interface RepositoryInterface
+interface StuffRepositoryInterface
 {
     /**
      * @return mixed

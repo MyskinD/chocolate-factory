@@ -1,12 +1,25 @@
 <?php
 
-namespace App\Api\Repositories\v1;
+namespace App\Api\Repositories;
 
-use App\Api\Repositories\RepositoryInterface;
 use App\Models\Api\v1\Stuff;
+use Illuminate\Support\Facades\DB;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class StuffRepository implements RepositoryInterface
+class V1StuffRepository implements StuffRepositoryInterface
 {
+    /** @var DB  */
+    protected $db;
+
+    /**
+     * V1StuffRepository constructor.
+     * @param DB $db
+     */
+    public function __construct(DB $db)
+    {
+        $this->db = $db;
+    }
+
     /**
      * @return mixed|void
      */
@@ -17,11 +30,20 @@ class StuffRepository implements RepositoryInterface
 
     /**
      * @param int $id
-     * @return mixed|void
+     * @return \Illuminate\Support\Collection|mixed
      */
     public function get(int $id)
     {
-        // TODO: Implement get() method.
+        $stuff = $this->db::table(Stuff::$tableName)
+            ->where('id', $id)
+            ->get();
+
+        if (is_null($stuff)) {
+
+            throw new NotFoundHttpException('Stuff was not found');
+        }
+
+        return $stuff;
     }
 
     /**
@@ -35,6 +57,7 @@ class StuffRepository implements RepositoryInterface
         $stuff->last_name = $data['last_name'];
         $stuff->email = $data['email'];
         $stuff->password = md5($data['password']);
+        $stuff->role = $data['role'];
         $stuff->save();
 
         return $stuff;
