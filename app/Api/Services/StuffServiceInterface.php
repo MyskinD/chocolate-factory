@@ -2,19 +2,19 @@
 
 namespace App\Api\Services;
 
-use App\Models\Api\v1\Stuff;
+use App\Api\Models\StuffInterface;
 
 interface StuffServiceInterface
 {
     /**
      * @param array $data
-     * @return Stuff
+     * @return StuffInterface
      */
-    public function create(array $data): Stuff;
+    public function create(array $data): StuffInterface;
 
     /**
      * @param int $id
-     * @return mixed
+     * @return StuffInterface
      */
     public function get(int $id);
 }

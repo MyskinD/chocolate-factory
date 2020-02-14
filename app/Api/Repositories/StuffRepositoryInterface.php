@@ -2,7 +2,7 @@
 
 namespace App\Api\Repositories;
 
-use App\Models\Api\v1\Stuff;
+use App\Api\Models\StuffInterface;
 
 interface StuffRepositoryInterface
 {
@@ -21,7 +21,7 @@ interface StuffRepositoryInterface
      * @param array $data
      * @return mixed
      */
-    public function add(array $data): Stuff;
+    public function add(array $data): StuffInterface;
 
     /**
      * @param int $id

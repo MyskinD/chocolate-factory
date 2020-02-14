@@ -2,7 +2,6 @@
 
 namespace App\Api\Validations;
 
-
 class StuffValidation extends Validation
 {
     /**

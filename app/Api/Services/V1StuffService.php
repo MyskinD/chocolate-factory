@@ -2,9 +2,9 @@
 
 namespace App\Api\Services;
 
+use App\Api\Models\StuffInterface;
 use App\Api\Repositories\StuffRepositoryInterface;
 use App\Api\Validations\StuffValidation;
-use App\Models\Api\v1\Stuff;
 use \Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class V1StuffService implements StuffServiceInterface
@@ -30,9 +30,9 @@ class V1StuffService implements StuffServiceInterface
 
     /**
      * @param array $data
-     * @return Stuff
+     * @return StuffInterface
      */
-    public function create(array $data): Stuff
+    public function create(array $data): StuffInterface
     {
         $this->stuffValidation->validateOnCreate($data);
         $newStuff = $this->stuffRepository->add($data);
@@ -46,7 +46,7 @@ class V1StuffService implements StuffServiceInterface
 
     /**
      * @param int $id
-     * @return mixed
+     * @return StuffInterface
      */
     public function get(int $id)
     {
