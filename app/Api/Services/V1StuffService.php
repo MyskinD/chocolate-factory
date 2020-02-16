@@ -48,7 +48,7 @@ class V1StuffService implements StuffServiceInterface
      * @param int $id
      * @return StuffInterface
      */
-    public function get(int $id)
+    public function get(int $id): StuffInterface
     {
         $stuff = $this->stuffRepository->get($id);
 

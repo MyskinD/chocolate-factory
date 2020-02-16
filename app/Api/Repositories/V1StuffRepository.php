@@ -4,23 +4,10 @@ namespace App\Api\Repositories;
 
 use App\Api\Models\StuffInterface;
 use App\Api\Models\V1Stuff;
-use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class V1StuffRepository implements StuffRepositoryInterface
 {
-    /** @var DB  */
-    protected $db;
-
-    /**
-     * V1StuffRepository constructor.
-     * @param DB $db
-     */
-    public function __construct(DB $db)
-    {
-        $this->db = $db;
-    }
-
     /**
      * @return mixed|void
      */
@@ -33,11 +20,11 @@ class V1StuffRepository implements StuffRepositoryInterface
      * @param int $id
      * @return StuffInterface
      */
-    public function get(int $id)
+    public function get(int $id): StuffInterface
     {
-        $stuff = $this->db::table(V1Stuff::$tableName)
+        $stuff = V1Stuff::query()
             ->where('id', $id)
-            ->get();
+            ->first();
 
         if (is_null($stuff)) {
 

@@ -2,7 +2,6 @@
 
 namespace App\Api\Models;
 
-
 interface StuffInterface
 {
     const GUEST    = 0;
