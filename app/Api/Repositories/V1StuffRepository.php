@@ -2,9 +2,11 @@
 
 namespace App\Api\Repositories;
 
-use App\Models\Stuff;
+use App\Api\Models\StuffInterface;
+use App\Api\Models\V1Stuff;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class StuffRepository implements StuffRepositoryInterface
+class V1StuffRepository implements StuffRepositoryInterface
 {
     /**
      * @return mixed|void
@@ -16,24 +18,34 @@ class StuffRepository implements StuffRepositoryInterface
 
     /**
      * @param int $id
-     * @return mixed|void
+     * @return StuffInterface
      */
-    public function get(int $id)
+    public function get(int $id): StuffInterface
     {
-        // TODO: Implement get() method.
+        $stuff = V1Stuff::query()
+            ->where('id', $id)
+            ->first();
+
+        if (is_null($stuff)) {
+
+            throw new NotFoundHttpException('Stuff was not found');
+        }
+
+        return $stuff;
     }
 
     /**
      * @param array $data
-     * @return Stuff
+     * @return StuffInterface
      */
-    public function add(array $data): Stuff
+    public function add(array $data): StuffInterface
     {
-        $stuff = new Stuff();
+        $stuff = new V1Stuff();
         $stuff->first_name = $data['first_name'];
         $stuff->last_name = $data['last_name'];
         $stuff->email = $data['email'];
         $stuff->password = md5($data['password']);
+        $stuff->role = (int) $data['role'];
         $stuff->save();
 
         return $stuff;

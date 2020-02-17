@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Models;
+namespace App\Api\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Stuff extends Model
+class V1Stuff extends Model implements StuffInterface
 {
     /** @var string  */
     protected $table = 'stuffs';
@@ -17,6 +17,7 @@ class Stuff extends Model
         'password',
         'created_at',
         'updated_at',
+        'role'
     ];
 
     /** @var array  */

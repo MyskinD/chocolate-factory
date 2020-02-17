@@ -2,22 +2,21 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Api\Services\StuffService;
+use App\Api\Services\StuffServiceInterface;
 use Illuminate\Http\Request;
 use Exception;
-use \Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use \Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class StuffController
 {
-    /** @var StuffService  */
+    /** @var StuffServiceInterface  */
     protected $stuffService;
 
     /**
      * StuffController constructor.
-     * @param StuffService $stuffService
+     * @param StuffServiceInterface $stuffService
      */
-    public function __construct(StuffService $stuffService)
+    public function __construct(StuffServiceInterface $stuffService)
     {
         $this->stuffService = $stuffService;
     }
@@ -31,12 +30,30 @@ class StuffController
         $data = $request->input();
 
         try {
-            $newStuff = $this->stuffService->createStuff($data);
+            $newStuff = $this->stuffService->create($data);
 
             return response()->json($newStuff, 201);
-        } catch (BadRequestHttpException $exception) {
+        } catch (NotFoundHttpException $exception) {
 
-            return response()->json($exception->getMessage(), 400);
+            return response()->json($exception->getMessage(), 404);
+        } catch(Exception $exception) {
+
+            return response()->json($exception->getMessage(), 500);
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function view(Request $request)
+    {
+        $id = $request->id;
+
+        try {
+            $stuff = $this->stuffService->get($id);
+
+            return response()->json($stuff, 200);
         } catch (NotFoundHttpException $exception) {
 
             return response()->json($exception->getMessage(), 404);
