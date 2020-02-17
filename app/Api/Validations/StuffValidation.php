@@ -16,5 +16,6 @@ class StuffValidation extends Validation
         $this->isNotNull($data['email'], 'email');
         $this->isEmail($data['email']);
         $this->isNotNull($data['password'], 'password');
+        $this->isNotNull($data['role'], 'role');
     }
 }

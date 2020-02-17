@@ -9,9 +9,6 @@ class V1Stuff extends Model implements StuffInterface
     /** @var string  */
     protected $table = 'stuffs';
 
-    /** @var string  */
-    public static $tableName = 'stuffs';
-
     /** @var array  */
     protected $fillable = [
         'first_name',

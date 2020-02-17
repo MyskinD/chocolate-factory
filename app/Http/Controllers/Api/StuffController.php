@@ -53,7 +53,7 @@ class StuffController
         try {
             $stuff = $this->stuffService->get($id);
 
-            return response()->json($stuff, 201);
+            return response()->json($stuff, 200);
         } catch (NotFoundHttpException $exception) {
 
             return response()->json($exception->getMessage(), 404);

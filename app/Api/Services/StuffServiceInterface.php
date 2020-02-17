@@ -16,5 +16,5 @@ interface StuffServiceInterface
      * @param int $id
      * @return StuffInterface
      */
-    public function get(int $id);
+    public function get(int $id): StuffInterface;
 }

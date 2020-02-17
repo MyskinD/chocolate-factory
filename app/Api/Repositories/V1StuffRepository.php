@@ -45,7 +45,7 @@ class V1StuffRepository implements StuffRepositoryInterface
         $stuff->last_name = $data['last_name'];
         $stuff->email = $data['email'];
         $stuff->password = md5($data['password']);
-        $stuff->role = $data['role'];
+        $stuff->role = (int) $data['role'];
         $stuff->save();
 
         return $stuff;
