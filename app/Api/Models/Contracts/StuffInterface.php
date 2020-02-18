@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Api\Models;
+namespace App\Api\Models\Contracts;
 
 interface StuffInterface
 {

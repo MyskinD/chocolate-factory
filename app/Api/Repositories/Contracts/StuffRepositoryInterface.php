@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Api\Repositories;
+namespace App\Api\Repositories\Contracts;
 
-use App\Api\Models\StuffInterface;
+use App\Api\Models\Contracts\StuffInterface;
 
 interface StuffRepositoryInterface
 {

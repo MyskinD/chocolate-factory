@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Api\Services;
+namespace App\Api\Services\Contracts;
 
-use App\Api\Models\StuffInterface;
+use App\Api\Models\Contracts\StuffInterface;
 
 interface StuffServiceInterface
 {

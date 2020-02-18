@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Api\Services\Contracts\AuthServiceInterface;
 use Illuminate\Http\Request;
+use App\Api\Services\Contracts\AuthServiceInterface;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use \Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Exception;

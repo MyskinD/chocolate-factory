@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Api\Repositories;
+namespace App\Api\Repositories\Contracts;
 
-use App\Api\Models\StuffInterface;
+use App\Api\Models\Contracts\StuffInterface;
 
-interface StuffAuthorizationInterface
+interface StuffAuthInterface
 {
     /**
      * @param array $data
@@ -17,5 +17,5 @@ interface StuffAuthorizationInterface
      * @param string $token
      * @return StuffInterface
      */
-    public function setAuthorizationToken(Int $id, string $token): StuffInterface;
+    public function saveToken(Int $id, string $token): StuffInterface;
 }

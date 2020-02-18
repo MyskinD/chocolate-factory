@@ -2,8 +2,9 @@
 
 namespace App\Api\Services;
 
-use App\Api\Models\StuffInterface;
-use App\Api\Repositories\StuffRepositoryInterface;
+use App\Api\Models\Contracts\StuffInterface;
+use App\Api\Repositories\Contracts\StuffRepositoryInterface;
+use App\Api\Services\Contracts\StuffServiceInterface;
 use App\Api\Validations\StuffValidation;
 use \Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 

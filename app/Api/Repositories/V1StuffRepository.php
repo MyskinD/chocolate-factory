@@ -2,11 +2,13 @@
 
 namespace App\Api\Repositories;
 
-use App\Api\Models\StuffInterface;
+use App\Api\Models\Contracts\StuffInterface;
 use App\Api\Models\V1Stuff;
+use App\Api\Repositories\Contracts\StuffAuthInterface;
+use App\Api\Repositories\Contracts\StuffRepositoryInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class V1StuffRepository implements StuffRepositoryInterface, StuffAuthorizationInterface
+class V1StuffRepository implements StuffRepositoryInterface, StuffAuthInterface
 {
     /**
      * @return mixed|void
@@ -94,11 +96,16 @@ class V1StuffRepository implements StuffRepositoryInterface, StuffAuthorizationI
      * @param string $token
      * @return StuffInterface
      */
-    public function setAuthorizationToken(int $id, string $token): StuffInterface
+    public function saveToken(int $id, string $token): StuffInterface
     {
         $stuff = V1Stuff::query()
             ->where('id', $id)
             ->first();
+
+        if (is_null($stuff)) {
+
+            throw new NotFoundHttpException('Stuff was not found');
+        }
 
         $stuff->token = $token;
         $stuff->save();

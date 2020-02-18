@@ -6,7 +6,7 @@ interface AuthServiceInterface
 {
     /**
      * @param array $data
-     * @return mixed
+     * @return array
      */
-    public function login(array $data);
+    public function login(array $data): array;
 }

@@ -18,15 +18,15 @@ class ApiServiceProvider extends ServiceProvider
         switch ($this->getVersionApi()) {
             case self::VERSION_API_V1:
                 $this->app->bind(
-                    \App\Api\Repositories\StuffRepositoryInterface::class,
+                    \App\Api\Repositories\Contracts\StuffRepositoryInterface::class,
                     \App\Api\Repositories\V1StuffRepository::class
                 );
                 $this->app->bind(
-                    \App\Api\Services\StuffServiceInterface::class,
+                    \App\Api\Services\Contracts\StuffServiceInterface::class,
                     \App\Api\Services\V1StuffService::class
                 );
                 $this->app->bind(
-                    \App\Api\Models\StuffInterface::class,
+                    \App\Api\Models\Contracts\StuffInterface::class,
                     \App\Api\Models\V1Stuff::class
                 );
                 $this->app->bind(

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Api\Services\StuffServiceInterface;
+use App\Api\Services\Contracts\StuffServiceInterface;
 use Illuminate\Http\Request;
 use Exception;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;

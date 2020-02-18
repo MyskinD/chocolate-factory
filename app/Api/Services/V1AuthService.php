@@ -2,7 +2,7 @@
 
 namespace App\Api\Services;
 
-use App\Api\Repositories\StuffRepositoryInterface;
+use App\Api\Repositories\Contracts\StuffRepositoryInterface;
 use App\Api\Services\Contracts\AuthServiceInterface;
 use App\Api\Validations\StuffValidation;
 
@@ -49,7 +49,8 @@ class V1AuthService implements AuthServiceInterface
                          hash('sha256', json_encode($payload)) . '.' .
                          hash('sha256', $secretKey);
 
-        $stuff = $this->stuffRepository->setAuthorizationToken($stuff->id, $token);
+        /**TODO Здесь не знаю как лучше делать, передавать id в репозиторий и делать дополнительный запрос в БД, или сразу передавать объект, а потом сохранять token в нем */
+        $stuff = $this->stuffRepository->saveToken($stuff->id, $token);
 
         return [
             'stuff' => $stuff,

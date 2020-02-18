@@ -2,6 +2,7 @@
 
 namespace App\Api\Models;
 
+use App\Api\Models\Contracts\StuffInterface;
 use Illuminate\Database\Eloquent\Model;
 
 class V1Stuff extends Model implements StuffInterface
