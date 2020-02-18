@@ -6,7 +6,7 @@ use App\Api\Models\StuffInterface;
 use App\Api\Models\V1Stuff;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class V1StuffRepository implements StuffRepositoryInterface
+class V1StuffRepository implements StuffRepositoryInterface, StuffAuthorizationInterface
 {
     /**
      * @return mixed|void
@@ -68,5 +68,41 @@ class V1StuffRepository implements StuffRepositoryInterface
     public function remove(int $id)
     {
         // TODO: Implement remove() method.
+    }
+
+    /**
+     * @param array $data
+     * @return StuffInterface
+     */
+    public function getStuffByEmailAndPassword(array $data): StuffInterface
+    {
+        $stuff = V1Stuff::query()
+            ->where('email', $data['email'])
+            ->where('password', md5($data['password']))
+            ->first();
+
+        if (is_null($stuff)) {
+
+            throw new NotFoundHttpException('Stuff was not found');
+        }
+
+        return $stuff;
+    }
+
+    /**
+     * @param int $id
+     * @param string $token
+     * @return StuffInterface
+     */
+    public function setAuthorizationToken(int $id, string $token): StuffInterface
+    {
+        $stuff = V1Stuff::query()
+            ->where('id', $id)
+            ->first();
+
+        $stuff->token = $token;
+        $stuff->save();
+
+        return $stuff;
     }
 }

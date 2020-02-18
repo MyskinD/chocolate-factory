@@ -17,5 +17,16 @@ class StuffValidation extends Validation
         $this->isEmail($data['email']);
         $this->isNotNull($data['password'], 'password');
         $this->isNotNull($data['role'], 'role');
+        $this->isRegExp('/^\d*$/', $data['role'], 'role');
+    }
+
+    /**
+     * @param array $data
+     */
+    public function validationOnLogin(array $data): void
+    {
+        $this->isNotNull($data['email'], 'email');
+        $this->isEmail($data['email']);
+        $this->isNotNull($data['password'], 'password');
     }
 }

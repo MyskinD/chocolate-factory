@@ -17,7 +17,8 @@ class V1Stuff extends Model implements StuffInterface
         'password',
         'created_at',
         'updated_at',
-        'role'
+        'role',
+        'token'
     ];
 
     /** @var array  */

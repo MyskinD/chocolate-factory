@@ -29,6 +29,10 @@ class ApiServiceProvider extends ServiceProvider
                     \App\Api\Models\StuffInterface::class,
                     \App\Api\Models\V1Stuff::class
                 );
+                $this->app->bind(
+                    \App\Api\Services\Contracts\AuthServiceInterface::class,
+                    \App\Api\Services\V1AuthService::class
+                );
         }
     }
 
