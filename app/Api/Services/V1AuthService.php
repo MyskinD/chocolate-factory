@@ -36,6 +36,9 @@ class V1AuthService implements AuthServiceInterface
         $this->stuffValidation->validationOnLogin($data);
         $stuff = $this->stuffRepository->getStuffByEmailAndPassword($data);
 
+        print_r($stuff);
+    die;
+
         $header = [
             'alg' => 'HS256',
             'typ' => 'JWT'

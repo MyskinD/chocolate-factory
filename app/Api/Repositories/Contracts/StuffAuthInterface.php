@@ -17,5 +17,5 @@ interface StuffAuthInterface
      * @param string $token
      * @return StuffInterface
      */
-    public function saveToken(Int $id, string $token): StuffInterface;
+    public function saveToken(int $id, string $token): StuffInterface;
 }
