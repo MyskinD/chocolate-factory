@@ -3,14 +3,14 @@
 namespace App\Api\Services;
 
 use App\Api\Models\Contracts\StuffInterface;
-use App\Api\Repositories\Contracts\StuffRepositoryInterface;
+use App\Api\Repositories\Contracts\RepositoryInterface;
 use App\Api\Services\Contracts\StuffServiceInterface;
 use App\Api\Validations\StuffValidation;
 use \Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class V1StuffService implements StuffServiceInterface
 {
-    /** @var StuffRepositoryInterface  */
+    /** @var RepositoryInterface  */
     protected $stuffRepository;
 
     /** @var StuffValidation  */
@@ -19,11 +19,11 @@ class V1StuffService implements StuffServiceInterface
     /**
      * StuffService constructor.
      * @param StuffValidation $stuffValidation
-     * @param StuffRepositoryInterface $stuffRepository
+     * @param RepositoryInterface $stuffRepository
      */
     public function __construct(
         StuffValidation $stuffValidation,
-        StuffRepositoryInterface $stuffRepository
+        RepositoryInterface $stuffRepository
     ) {
         $this->stuffValidation = $stuffValidation;
         $this->stuffRepository = $stuffRepository;

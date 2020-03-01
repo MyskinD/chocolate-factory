@@ -2,9 +2,7 @@
 
 namespace App\Api\Repositories\Contracts;
 
-use App\Api\Models\Contracts\StuffInterface;
-
-interface StuffRepositoryInterface
+interface RepositoryInterface
 {
     /**
      * @return mixed
@@ -21,7 +19,7 @@ interface StuffRepositoryInterface
      * @param array $data
      * @return mixed
      */
-    public function add(array $data): StuffInterface;
+    public function add(array $data);
 
     /**
      * @param int $id

@@ -18,7 +18,7 @@ class ApiServiceProvider extends ServiceProvider
         switch ($this->getVersionApi()) {
             case self::VERSION_API_V1:
                 $this->app->bind(
-                    \App\Api\Repositories\Contracts\StuffRepositoryInterface::class,
+                    \App\Api\Repositories\Contracts\RepositoryInterface::class,
                     \App\Api\Repositories\V1StuffRepository::class
                 );
                 $this->app->bind(
@@ -32,6 +32,10 @@ class ApiServiceProvider extends ServiceProvider
                 $this->app->bind(
                     \App\Api\Services\Contracts\AuthServiceInterface::class,
                     \App\Api\Services\V1AuthService::class
+                );
+                $this->app->bind(
+                    \App\Api\Services\Contracts\JwtServiceInterface::class,
+                    \App\Api\Services\JwtService::class
                 );
         }
     }

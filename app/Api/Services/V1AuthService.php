@@ -2,29 +2,44 @@
 
 namespace App\Api\Services;
 
-use App\Api\Repositories\Contracts\StuffRepositoryInterface;
+use App\Api\Models\V1Session;
+use App\Api\Repositories\Contracts\RepositoryInterface;
+use App\Api\Repositories\V1SessionRepository;
 use App\Api\Services\Contracts\AuthServiceInterface;
+use App\Api\Services\Contracts\JwtServiceInterface;
 use App\Api\Validations\StuffValidation;
 
 class V1AuthService implements AuthServiceInterface
 {
-    /** @var StuffRepositoryInterface  */
+    /** @var RepositoryInterface */
     protected $stuffRepository;
+
+    /** @var V1SessionRepository */
+    protected $sessionRepository;
 
     /** @var StuffValidation  */
     protected $stuffValidation;
 
+    /** @var JwtServiceInterface  */
+    protected $jwtService;
+
     /**
-     * StuffService constructor.
+     * V1AuthService constructor.
      * @param StuffValidation $stuffValidation
-     * @param StuffRepositoryInterface $stuffRepository
+     * @param RepositoryInterface $stuffRepository
+     * @param V1SessionRepository $sessionRepository
+     * @param JwtServiceInterface $jwtService
      */
     public function __construct(
         StuffValidation $stuffValidation,
-        StuffRepositoryInterface $stuffRepository
+        RepositoryInterface $stuffRepository,
+        V1SessionRepository $sessionRepository,
+        JwtServiceInterface $jwtService
     ) {
         $this->stuffValidation = $stuffValidation;
         $this->stuffRepository = $stuffRepository;
+        $this->sessionRepository = $sessionRepository;
+        $this->jwtService = $jwtService;
     }
 
     /**
@@ -36,28 +51,27 @@ class V1AuthService implements AuthServiceInterface
         $this->stuffValidation->validationOnLogin($data);
         $stuff = $this->stuffRepository->getStuffByEmailAndPassword($data);
 
-        print_r($stuff);
-    die;
+        if (is_null($stuff)) {
+            throw new NotFoundHttpException('Stuff was not created');
+        }
 
-        $header = [
-            'alg' => 'HS256',
-            'typ' => 'JWT'
-        ];
-        $payload = [
+        $accessToken = $this->jwtService->getAccessToken($stuff);
+        $refreshToken = $this->jwtService->getRefreshToken($stuff);
+
+        if (count($this->sessionRepository->allById($stuff->id)) >= V1Session::SESSION_COUNT) {
+            $this->sessionRepository->remove($stuff->id);
+        }
+
+        $this->sessionRepository->add([
             'stuffId' => $stuff->id,
-            'role' => $stuff->role
-        ];
-        $secretKey = env('APP_KEY');
-        $token = hash('sha256', json_encode($header)) . '.' .
-                         hash('sha256', json_encode($payload)) . '.' .
-                         hash('sha256', $secretKey);
-
-        /**TODO Здесь не знаю как лучше делать, передавать id в репозиторий и делать дополнительный запрос в БД, или сразу передавать объект, а потом сохранять token в нем */
-        $stuff = $this->stuffRepository->saveToken($stuff->id, $token);
+            'accessToken' => $accessToken,
+            'refreshToken' => $refreshToken
+        ]);
 
         return [
             'stuff' => $stuff,
-            'token' => $token
+            'access_token' => $accessToken,
+            'refresh_token' => $refreshToken,
         ];
     }
 }

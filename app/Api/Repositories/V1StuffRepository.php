@@ -4,11 +4,11 @@ namespace App\Api\Repositories;
 
 use App\Api\Models\Contracts\StuffInterface;
 use App\Api\Models\V1Stuff;
-use App\Api\Repositories\Contracts\StuffAuthInterface;
-use App\Api\Repositories\Contracts\StuffRepositoryInterface;
+use App\Api\Repositories\Contracts\AuthInterface;
+use App\Api\Repositories\Contracts\RepositoryInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class V1StuffRepository implements StuffRepositoryInterface, StuffAuthInterface
+class V1StuffRepository implements RepositoryInterface, AuthInterface
 {
     /**
      * @return mixed|void
@@ -22,7 +22,7 @@ class V1StuffRepository implements StuffRepositoryInterface, StuffAuthInterface
      * @param int $id
      * @return StuffInterface
      */
-    public function get(int $id): StuffInterface
+    public function get(int $id)
     {
         $stuff = V1Stuff::query()
             ->where('id', $id)
@@ -40,7 +40,7 @@ class V1StuffRepository implements StuffRepositoryInterface, StuffAuthInterface
      * @param array $data
      * @return StuffInterface
      */
-    public function add(array $data): StuffInterface
+    public function add(array $data)
     {
         $stuff = new V1Stuff();
         $stuff->first_name = $data['first_name'];
@@ -87,28 +87,6 @@ class V1StuffRepository implements StuffRepositoryInterface, StuffAuthInterface
 
             throw new NotFoundHttpException('Stuff was not found');
         }
-
-        return $stuff;
-    }
-
-    /**
-     * @param int $id
-     * @param string $token
-     * @return StuffInterface
-     */
-    public function saveToken(int $id, string $token): StuffInterface
-    {
-        $stuff = V1Stuff::query()
-            ->where('id', $id)
-            ->first();
-
-        if (is_null($stuff)) {
-
-            throw new NotFoundHttpException('Stuff was not found');
-        }
-
-        $stuff->token = $token;
-        $stuff->save();
 
         return $stuff;
     }
