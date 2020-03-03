@@ -46,7 +46,7 @@ class V1StuffRepository implements RepositoryInterface, AuthInterface
         $stuff->first_name = $data['first_name'];
         $stuff->last_name = $data['last_name'];
         $stuff->email = $data['email'];
-        $stuff->password = md5($data['password']);
+        $stuff->password = $data['password'];
         $stuff->role = (int) $data['role'];
         $stuff->save();
 
@@ -80,7 +80,7 @@ class V1StuffRepository implements RepositoryInterface, AuthInterface
     {
         $stuff = V1Stuff::query()
             ->where('email', $data['email'])
-            ->where('password', md5($data['password']))
+            ->where('password', $data['password'])
             ->first();
 
         if (is_null($stuff)) {

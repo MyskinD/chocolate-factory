@@ -123,6 +123,10 @@ return [
 
     'secret_key' => 'fxO1Uw63YDyaZmHV?PszM.Fo',
 
+    'access_token_lifetime' => time() + 60 * 30,
+
+    'refresh_token_lifetime' => time() + 60 * 60 * 24 * 60,
+
     'cipher' => 'AES-256-CBC',
 
     /*

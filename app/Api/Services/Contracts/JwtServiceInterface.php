@@ -2,19 +2,19 @@
 
 namespace App\Api\Services\Contracts;
 
-use App\Api\Models\V1Stuff;
+use App\Api\Dto\Contracts\DtoInterface;
 
 interface JwtServiceInterface
 {
     /**
-     * @param V1Stuff $stuff
+     * @param DtoInterface $dto
      * @return string
      */
-    public function getAccessToken(V1Stuff $stuff): string;
+    public function getAccessToken(DtoInterface $dto): string;
 
     /**
-     * @param V1Stuff $stuff
+     * @param DtoInterface $dto
      * @return string
      */
-    public function getRefreshToken(V1Stuff $stuff): string;
+    public function getRefreshToken(DtoInterface $dto): string;
 }

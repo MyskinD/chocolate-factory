@@ -36,6 +36,7 @@ class V1StuffService implements StuffServiceInterface
     public function create(array $data): StuffInterface
     {
         $this->stuffValidation->validateOnCreate($data);
+        $data['password'] = md5($data['password']);
         $newStuff = $this->stuffRepository->add($data);
 
         if (is_null($newStuff)) {

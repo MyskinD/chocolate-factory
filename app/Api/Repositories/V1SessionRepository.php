@@ -14,7 +14,7 @@ class V1SessionRepository implements RepositoryInterface
 
     /**
      * @param int $id
-     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+     * @return V1Session
      */
     public function allById(int $id)
     {
@@ -32,7 +32,7 @@ class V1SessionRepository implements RepositoryInterface
 
     /**
      * @param array $data
-     * @return V1Session|mixed
+     * @return V1Session
      */
     public function add(array $data)
     {

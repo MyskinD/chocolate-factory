@@ -2,6 +2,7 @@
 
 namespace App\Api\Services;
 
+use App\Api\Dto\StuffDTO;
 use App\Api\Models\V1Session;
 use App\Api\Repositories\Contracts\RepositoryInterface;
 use App\Api\Repositories\V1SessionRepository;
@@ -49,14 +50,15 @@ class V1AuthService implements AuthServiceInterface
     public function login(array $data): array
     {
         $this->stuffValidation->validationOnLogin($data);
+        $data['password'] = md5($data['password']);
         $stuff = $this->stuffRepository->getStuffByEmailAndPassword($data);
 
-        if (is_null($stuff)) {
-            throw new NotFoundHttpException('Stuff was not created');
-        }
+        $stuffDto = new StuffDTO();
+        $stuffDto->id = $stuff->id;
+        $stuffDto->role = $stuff->role;
 
-        $accessToken = $this->jwtService->getAccessToken($stuff);
-        $refreshToken = $this->jwtService->getRefreshToken($stuff);
+        $accessToken = $this->jwtService->getAccessToken($stuffDto);
+        $refreshToken = $this->jwtService->getRefreshToken($stuffDto);
 
         if (count($this->sessionRepository->allById($stuff->id)) >= V1Session::SESSION_COUNT) {
             $this->sessionRepository->remove($stuff->id);
