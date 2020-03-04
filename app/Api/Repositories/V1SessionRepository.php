@@ -3,26 +3,13 @@
 namespace App\Api\Repositories;
 
 use App\Api\Models\V1Session;
-use App\Api\Repositories\Contracts\RepositoryInterface;
+use App\Api\Repositories\Contracts\SessionRepositoryInterface;
 
-class V1SessionRepository implements RepositoryInterface
+class V1SessionRepository implements SessionRepositoryInterface
 {
     public function all()
     {
         // TODO: Implement all() method.
-    }
-
-    /**
-     * @param int $id
-     * @return V1Session
-     */
-    public function allById(int $id)
-    {
-        $sessions = V1Session::query()
-            ->where('stuff_id', $id)
-            ->get();
-
-        return $sessions;
     }
 
     public function get(int $id)
@@ -32,7 +19,7 @@ class V1SessionRepository implements RepositoryInterface
 
     /**
      * @param array $data
-     * @return V1Session
+     * @return V1Session|mixed
      */
     public function add(array $data)
     {
@@ -41,6 +28,11 @@ class V1SessionRepository implements RepositoryInterface
         $session->access_token = $data['accessToken'];
         $session->refresh_token = $data['refreshToken'];
         $session->save();
+
+        if (is_null($session)) {
+
+            throw new NotFoundHttpException('Session was not created');
+        }
 
         return $session;
     }
@@ -58,5 +50,18 @@ class V1SessionRepository implements RepositoryInterface
         V1Session::query()
             ->where('stuff_id', $id)
             ->delete();
+    }
+
+    /**
+     * @param int $id
+     * @return int
+     */
+    public function countByStuffId(int $id): int
+    {
+        $count = V1Session::query()
+            ->where('stuff_id', $id)
+            ->count();
+
+        return $count;
     }
 }

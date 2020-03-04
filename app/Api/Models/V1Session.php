@@ -6,9 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class V1Session extends Model
 {
-    /** @var int */
-    public const SESSION_COUNT = 5;
-
     /** @var string  */
     protected $table = 'sessions';
 

@@ -3,19 +3,18 @@
 namespace App\Api\Services;
 
 use App\Api\Dto\StuffDTO;
-use App\Api\Models\V1Session;
-use App\Api\Repositories\Contracts\RepositoryInterface;
-use App\Api\Repositories\V1SessionRepository;
+use App\Api\Repositories\Contracts\SessionRepositoryInterface;
+use App\Api\Repositories\Contracts\StuffRepositoryInterface;
 use App\Api\Services\Contracts\AuthServiceInterface;
 use App\Api\Services\Contracts\JwtServiceInterface;
 use App\Api\Validations\StuffValidation;
 
 class V1AuthService implements AuthServiceInterface
 {
-    /** @var RepositoryInterface */
+    /** @var StuffRepositoryInterface  */
     protected $stuffRepository;
 
-    /** @var V1SessionRepository */
+    /** @var SessionRepositoryInterface  */
     protected $sessionRepository;
 
     /** @var StuffValidation  */
@@ -27,14 +26,14 @@ class V1AuthService implements AuthServiceInterface
     /**
      * V1AuthService constructor.
      * @param StuffValidation $stuffValidation
-     * @param RepositoryInterface $stuffRepository
-     * @param V1SessionRepository $sessionRepository
+     * @param StuffRepositoryInterface $stuffRepository
+     * @param SessionRepositoryInterface $sessionRepository
      * @param JwtServiceInterface $jwtService
      */
     public function __construct(
         StuffValidation $stuffValidation,
-        RepositoryInterface $stuffRepository,
-        V1SessionRepository $sessionRepository,
+        StuffRepositoryInterface $stuffRepository,
+        SessionRepositoryInterface $sessionRepository,
         JwtServiceInterface $jwtService
     ) {
         $this->stuffValidation = $stuffValidation;
@@ -57,10 +56,13 @@ class V1AuthService implements AuthServiceInterface
         $stuffDto->id = $stuff->id;
         $stuffDto->role = $stuff->role;
 
-        $accessToken = $this->jwtService->getAccessToken($stuffDto);
-        $refreshToken = $this->jwtService->getRefreshToken($stuffDto);
+        $stuffDto->lifetime = config('app.access_token_lifetime');
+        $accessToken = $this->jwtService->getToken($stuffDto);
 
-        if (count($this->sessionRepository->allById($stuff->id)) >= V1Session::SESSION_COUNT) {
+        $stuffDto->lifetime = config('app.refresh_token_lifetime');
+        $refreshToken = $this->jwtService->getToken($stuffDto);
+
+        if ($this->sessionRepository->countByStuffId($stuff->id) >= $stuffDto::MAX_ACTIVE_SESSION) {
             $this->sessionRepository->remove($stuff->id);
         }
 

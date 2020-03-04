@@ -2,13 +2,11 @@
 
 namespace App\Api\Repositories;
 
-use App\Api\Models\Contracts\StuffInterface;
 use App\Api\Models\V1Stuff;
-use App\Api\Repositories\Contracts\AuthInterface;
-use App\Api\Repositories\Contracts\RepositoryInterface;
+use App\Api\Repositories\Contracts\StuffRepositoryInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class V1StuffRepository implements RepositoryInterface, AuthInterface
+class V1StuffRepository implements StuffRepositoryInterface
 {
     /**
      * @return mixed|void
@@ -20,7 +18,7 @@ class V1StuffRepository implements RepositoryInterface, AuthInterface
 
     /**
      * @param int $id
-     * @return StuffInterface
+     * @return V1Stuff|mixed
      */
     public function get(int $id)
     {
@@ -38,7 +36,7 @@ class V1StuffRepository implements RepositoryInterface, AuthInterface
 
     /**
      * @param array $data
-     * @return StuffInterface
+     * @return V1Stuff|mixed
      */
     public function add(array $data)
     {
@@ -49,6 +47,11 @@ class V1StuffRepository implements RepositoryInterface, AuthInterface
         $stuff->password = $data['password'];
         $stuff->role = (int) $data['role'];
         $stuff->save();
+
+        if (is_null($stuff)) {
+
+            throw new NotFoundHttpException('Stuff was not created');
+        }
 
         return $stuff;
     }
@@ -67,16 +70,16 @@ class V1StuffRepository implements RepositoryInterface, AuthInterface
      * @param int $id
      * @return mixed|void
      */
-    public function remove(int $id)
+    public function remove(int $id): void
     {
         // TODO: Implement remove() method.
     }
 
     /**
      * @param array $data
-     * @return StuffInterface
+     * @return V1Stuff|mixed
      */
-    public function getStuffByEmailAndPassword(array $data): StuffInterface
+    public function getStuffByEmailAndPassword(array $data)
     {
         $stuff = V1Stuff::query()
             ->where('email', $data['email'])

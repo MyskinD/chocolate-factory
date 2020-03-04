@@ -2,11 +2,15 @@
 
 namespace App\Api\Models;
 
-use App\Api\Models\Contracts\StuffInterface;
 use Illuminate\Database\Eloquent\Model;
 
-class V1Stuff extends Model implements StuffInterface
+class V1Stuff extends Model
 {
+    const GUEST    = 0;
+    const WORKER   = 1;
+    const MANAGER  = 2;
+    const DIRECTOR = 3;
+
     /** @var string  */
     protected $table = 'stuffs';
 

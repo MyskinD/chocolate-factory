@@ -7,34 +7,14 @@ use App\Api\Services\Contracts\JwtServiceInterface;
 
 class JwtService implements JwtServiceInterface
 {
-    /** @var DtoInterface */
-    protected $dto;
-
     /**
      * @param DtoInterface $dto
      * @return string
      */
-    public function getAccessToken(DtoInterface $dto): string
+    public function getToken(DtoInterface $dto): string
     {
-        $this->dto = $dto;
-
         $header = $this->getHeader();
-        $payload = $this->getPayload(config('app.access_token_lifetime'));
-        $signature =$this->getSignature($header, $payload);
-
-        return $header . '.' . $payload . '.' . $signature;
-    }
-
-    /**
-     * @param DtoInterface $dto
-     * @return string
-     */
-    public function getRefreshToken(DtoInterface $dto): string
-    {
-        $this->dto = $dto;
-
-        $header = $this->getHeader();
-        $payload = $this->getPayload(config('app.refresh_token_lifetime'));
+        $payload = $this->getPayload($dto);
         $signature =$this->getSignature($header, $payload);
 
         return $header . '.' . $payload . '.' . $signature;
@@ -55,15 +35,15 @@ class JwtService implements JwtServiceInterface
     }
 
     /**
-     * @param $lifetime
+     * @param DtoInterface $dto
      * @return string
      */
-    protected function getPayload(string $lifetime): string
+    protected function getPayload(DtoInterface $dto): string
     {
         $payload = [
-            'id' => $this->dto->id,
-            'role' => $this->dto->role,
-            'lifetime' => $lifetime
+            'id' => $dto->id,
+            'role' => $dto->role,
+            'lifetime' => $dto->lifetime
         ];
         $payload = json_encode($payload);
 

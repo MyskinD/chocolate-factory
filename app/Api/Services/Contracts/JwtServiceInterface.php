@@ -10,11 +10,5 @@ interface JwtServiceInterface
      * @param DtoInterface $dto
      * @return string
      */
-    public function getAccessToken(DtoInterface $dto): string;
-
-    /**
-     * @param DtoInterface $dto
-     * @return string
-     */
-    public function getRefreshToken(DtoInterface $dto): string;
+    public function getToken(DtoInterface $dto): string;
 }

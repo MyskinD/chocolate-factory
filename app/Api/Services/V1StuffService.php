@@ -2,28 +2,27 @@
 
 namespace App\Api\Services;
 
-use App\Api\Models\Contracts\StuffInterface;
-use App\Api\Repositories\Contracts\RepositoryInterface;
+use App\Api\Models\Contracts\ModelInterface;
+use App\Api\Repositories\Contracts\StuffRepositoryInterface;
 use App\Api\Services\Contracts\StuffServiceInterface;
 use App\Api\Validations\StuffValidation;
-use \Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class V1StuffService implements StuffServiceInterface
 {
-    /** @var RepositoryInterface  */
+    /** @var StuffRepositoryInterface  */
     protected $stuffRepository;
 
     /** @var StuffValidation  */
     protected $stuffValidation;
 
     /**
-     * StuffService constructor.
+     * V1StuffService constructor.
      * @param StuffValidation $stuffValidation
-     * @param RepositoryInterface $stuffRepository
+     * @param StuffRepositoryInterface $stuffRepository
      */
     public function __construct(
         StuffValidation $stuffValidation,
-        RepositoryInterface $stuffRepository
+        StuffRepositoryInterface $stuffRepository
     ) {
         $this->stuffValidation = $stuffValidation;
         $this->stuffRepository = $stuffRepository;
@@ -31,26 +30,22 @@ class V1StuffService implements StuffServiceInterface
 
     /**
      * @param array $data
-     * @return StuffInterface
+     * @return ModelInterface
      */
-    public function create(array $data): StuffInterface
+    public function create(array $data): ModelInterface
     {
         $this->stuffValidation->validateOnCreate($data);
         $data['password'] = md5($data['password']);
         $newStuff = $this->stuffRepository->add($data);
-
-        if (is_null($newStuff)) {
-            throw new NotFoundHttpException('Stuff was not created');
-        }
 
         return $newStuff;
     }
 
     /**
      * @param int $id
-     * @return StuffInterface
+     * @return ModelInterface
      */
-    public function get(int $id): StuffInterface
+    public function get(int $id): ModelInterface
     {
         $stuff = $this->stuffRepository->get($id);
 

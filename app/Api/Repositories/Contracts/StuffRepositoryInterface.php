@@ -2,7 +2,7 @@
 
 namespace App\Api\Repositories\Contracts;
 
-interface RepositoryInterface
+interface StuffRepositoryInterface
 {
     /**
      * @return mixed
@@ -32,5 +32,11 @@ interface RepositoryInterface
      * @param int $id
      * @return mixed
      */
-    public function remove(int $id);
+    public function remove(int $id): void;
+
+    /**
+     * @param array $data
+     * @return ModelInterface
+     */
+    public function getStuffByEmailAndPassword(array $data);
 }

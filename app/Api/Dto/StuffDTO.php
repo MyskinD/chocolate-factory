@@ -11,4 +11,7 @@ class StuffDTO implements DtoInterface
 
     /** @var string */
     public $role;
+
+    /** @var string */
+    public $lifetime;
 }

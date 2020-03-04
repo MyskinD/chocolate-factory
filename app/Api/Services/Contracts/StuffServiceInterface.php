@@ -2,19 +2,19 @@
 
 namespace App\Api\Services\Contracts;
 
-use App\Api\Models\Contracts\StuffInterface;
+use App\Api\Models\Contracts\ModelInterface;
 
 interface StuffServiceInterface
 {
     /**
      * @param array $data
-     * @return StuffInterface
+     * @return ModelInterface
      */
-    public function create(array $data): StuffInterface;
+    public function create(array $data): ModelInterface;
 
     /**
      * @param int $id
-     * @return StuffInterface
+     * @return ModelInterface
      */
-    public function get(int $id): StuffInterface;
+    public function get(int $id): ModelInterface;
 }
