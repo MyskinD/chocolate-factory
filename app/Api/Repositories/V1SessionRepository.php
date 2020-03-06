@@ -4,6 +4,7 @@ namespace App\Api\Repositories;
 
 use App\Api\Models\V1Session;
 use App\Api\Repositories\Contracts\SessionRepositoryInterface;
+use Illuminate\Database\Eloquent\Model;
 
 class V1SessionRepository implements SessionRepositoryInterface
 {
@@ -19,9 +20,9 @@ class V1SessionRepository implements SessionRepositoryInterface
 
     /**
      * @param array $data
-     * @return V1Session|mixed
+     * @return Model
      */
-    public function add(array $data)
+    public function add(array $data): Model
     {
         $session = new V1Session();
         $session->stuff_id = $data['stuffId'];
@@ -45,7 +46,7 @@ class V1SessionRepository implements SessionRepositoryInterface
     /**
      * @param int $id
      */
-    public function remove(int $id): void
+    public function removeByStuffId(int $id): void
     {
         V1Session::query()
             ->where('stuff_id', $id)

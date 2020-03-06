@@ -2,6 +2,8 @@
 
 namespace App\Api\Repositories\Contracts;
 
+use Illuminate\Database\Eloquent\Model;
+
 interface StuffRepositoryInterface
 {
     /**
@@ -13,13 +15,13 @@ interface StuffRepositoryInterface
      * @param int $id
      * @return mixed
      */
-    public function get(int $id);
+    public function get(int $id): Model;
 
     /**
      * @param array $data
      * @return mixed
      */
-    public function add(array $data);
+    public function add(array $data): Model;
 
     /**
      * @param int $id
@@ -35,8 +37,9 @@ interface StuffRepositoryInterface
     public function remove(int $id): void;
 
     /**
-     * @param array $data
-     * @return ModelInterface
+     * @param string $email
+     * @param string $password
+     * @return Model
      */
-    public function getStuffByEmailAndPassword(array $data);
+    public function getStuffByEmailAndPassword(string $email, string $password): Model;
 }

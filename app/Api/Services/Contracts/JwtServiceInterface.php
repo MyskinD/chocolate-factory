@@ -2,13 +2,13 @@
 
 namespace App\Api\Services\Contracts;
 
-use App\Api\Dto\Contracts\DtoInterface;
+use App\Api\Dto\JwtDTO;
 
 interface JwtServiceInterface
 {
     /**
-     * @param DtoInterface $dto
+     * @param JwtDTO $dto
      * @return string
      */
-    public function getToken(DtoInterface $dto): string;
+    public function getToken(JwtDTO $dto): string;
 }

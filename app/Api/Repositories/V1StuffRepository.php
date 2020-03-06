@@ -4,6 +4,7 @@ namespace App\Api\Repositories;
 
 use App\Api\Models\V1Stuff;
 use App\Api\Repositories\Contracts\StuffRepositoryInterface;
+use Illuminate\Database\Eloquent\Model;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class V1StuffRepository implements StuffRepositoryInterface
@@ -18,9 +19,9 @@ class V1StuffRepository implements StuffRepositoryInterface
 
     /**
      * @param int $id
-     * @return V1Stuff|mixed
+     * @return Model
      */
-    public function get(int $id)
+    public function get(int $id): Model
     {
         $stuff = V1Stuff::query()
             ->where('id', $id)
@@ -36,9 +37,9 @@ class V1StuffRepository implements StuffRepositoryInterface
 
     /**
      * @param array $data
-     * @return V1Stuff|mixed
+     * @return Model
      */
-    public function add(array $data)
+    public function add(array $data): Model
     {
         $stuff = new V1Stuff();
         $stuff->first_name = $data['first_name'];
@@ -76,14 +77,15 @@ class V1StuffRepository implements StuffRepositoryInterface
     }
 
     /**
-     * @param array $data
-     * @return V1Stuff|mixed
+     * @param string $email
+     * @param string $password
+     * @return Model
      */
-    public function getStuffByEmailAndPassword(array $data)
+    public function getStuffByEmailAndPassword(string $email, string $password): Model
     {
         $stuff = V1Stuff::query()
-            ->where('email', $data['email'])
-            ->where('password', $data['password'])
+            ->where('email', $email)
+            ->where('password', $password)
             ->first();
 
         if (is_null($stuff)) {

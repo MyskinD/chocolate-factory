@@ -2,6 +2,8 @@
 
 namespace App\Api\Repositories\Contracts;
 
+use Illuminate\Database\Eloquent\Model;
+
 interface SessionRepositoryInterface
 {
     /**
@@ -19,7 +21,7 @@ interface SessionRepositoryInterface
      * @param array $data
      * @return mixed
      */
-    public function add(array $data);
+    public function add(array $data): Model;
 
     /**
      * @param int $id
@@ -32,7 +34,7 @@ interface SessionRepositoryInterface
      * @param int $id
      * @return mixed
      */
-    public function remove(int $id): void;
+    public function removeByStuffId(int $id): void;
 
     /**
      * @param int $id

@@ -38,11 +38,6 @@ class ApiServiceProvider extends ServiceProvider
                     \App\Api\Services\Contracts\JwtServiceInterface::class,
                     \App\Api\Services\JwtService::class
                 );
-
-                $this->app->bind(
-                    \App\Api\Dto\Contracts\DtoInterface::class,
-                    \App\Api\Dto\StuffDTO::class
-                );
         }
     }
 

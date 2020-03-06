@@ -2,19 +2,19 @@
 
 namespace App\Api\Services\Contracts;
 
-use App\Api\Models\Contracts\ModelInterface;
+use Illuminate\Database\Eloquent\Model;
 
 interface StuffServiceInterface
 {
     /**
      * @param array $data
-     * @return ModelInterface
+     * @return Model
      */
-    public function create(array $data): ModelInterface;
+    public function create(array $data): Model;
 
     /**
      * @param int $id
-     * @return ModelInterface
+     * @return Model
      */
-    public function get(int $id): ModelInterface;
+    public function get(int $id): Model;
 }

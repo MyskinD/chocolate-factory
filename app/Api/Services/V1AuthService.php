@@ -2,7 +2,7 @@
 
 namespace App\Api\Services;
 
-use App\Api\Dto\StuffDTO;
+use App\Api\Dto\JwtDTO;
 use App\Api\Repositories\Contracts\SessionRepositoryInterface;
 use App\Api\Repositories\Contracts\StuffRepositoryInterface;
 use App\Api\Services\Contracts\AuthServiceInterface;
@@ -11,6 +11,9 @@ use App\Api\Validations\StuffValidation;
 
 class V1AuthService implements AuthServiceInterface
 {
+    /** @var int */
+    public const MAX_ACTIVE_SESSION = 5;
+
     /** @var StuffRepositoryInterface  */
     protected $stuffRepository;
 
@@ -50,9 +53,9 @@ class V1AuthService implements AuthServiceInterface
     {
         $this->stuffValidation->validationOnLogin($data);
         $data['password'] = md5($data['password']);
-        $stuff = $this->stuffRepository->getStuffByEmailAndPassword($data);
+        $stuff = $this->stuffRepository->getStuffByEmailAndPassword($data['email'], $data['password']);
 
-        $stuffDto = new StuffDTO();
+        $stuffDto = new JwtDTO();
         $stuffDto->id = $stuff->id;
         $stuffDto->role = $stuff->role;
 
@@ -62,8 +65,8 @@ class V1AuthService implements AuthServiceInterface
         $stuffDto->lifetime = config('app.refresh_token_lifetime');
         $refreshToken = $this->jwtService->getToken($stuffDto);
 
-        if ($this->sessionRepository->countByStuffId($stuff->id) >= $stuffDto::MAX_ACTIVE_SESSION) {
-            $this->sessionRepository->remove($stuff->id);
+        if ($this->sessionRepository->countByStuffId($stuff->id) >= self::MAX_ACTIVE_SESSION) {
+            $this->sessionRepository->removeByStuffId($stuff->id);
         }
 
         $this->sessionRepository->add([

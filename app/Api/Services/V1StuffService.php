@@ -2,10 +2,10 @@
 
 namespace App\Api\Services;
 
-use App\Api\Models\Contracts\ModelInterface;
 use App\Api\Repositories\Contracts\StuffRepositoryInterface;
 use App\Api\Services\Contracts\StuffServiceInterface;
 use App\Api\Validations\StuffValidation;
+use Illuminate\Database\Eloquent\Model;
 
 class V1StuffService implements StuffServiceInterface
 {
@@ -30,9 +30,9 @@ class V1StuffService implements StuffServiceInterface
 
     /**
      * @param array $data
-     * @return ModelInterface
+     * @return Model
      */
-    public function create(array $data): ModelInterface
+    public function create(array $data): Model
     {
         $this->stuffValidation->validateOnCreate($data);
         $data['password'] = md5($data['password']);
@@ -43,9 +43,9 @@ class V1StuffService implements StuffServiceInterface
 
     /**
      * @param int $id
-     * @return ModelInterface
+     * @return Model
      */
-    public function get(int $id): ModelInterface
+    public function get(int $id): Model
     {
         $stuff = $this->stuffRepository->get($id);
 

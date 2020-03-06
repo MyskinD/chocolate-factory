@@ -2,16 +2,16 @@
 
 namespace App\Api\Services;
 
-use App\Api\Dto\Contracts\DtoInterface;
+use App\Api\Dto\JwtDTO;
 use App\Api\Services\Contracts\JwtServiceInterface;
 
 class JwtService implements JwtServiceInterface
 {
     /**
-     * @param DtoInterface $dto
+     * @param JwtDTO $dto
      * @return string
      */
-    public function getToken(DtoInterface $dto): string
+    public function getToken(JwtDTO $dto): string
     {
         $header = $this->getHeader();
         $payload = $this->getPayload($dto);
@@ -35,10 +35,10 @@ class JwtService implements JwtServiceInterface
     }
 
     /**
-     * @param DtoInterface $dto
+     * @param JwtDTO $dto
      * @return string
      */
-    protected function getPayload(DtoInterface $dto): string
+    protected function getPayload(JwtDTO $dto): string
     {
         $payload = [
             'id' => $dto->id,
