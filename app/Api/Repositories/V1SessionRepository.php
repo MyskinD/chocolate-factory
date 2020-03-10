@@ -5,6 +5,7 @@ namespace App\Api\Repositories;
 use App\Api\Models\V1Session;
 use App\Api\Repositories\Contracts\SessionRepositoryInterface;
 use Illuminate\Database\Eloquent\Model;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class V1SessionRepository implements SessionRepositoryInterface
 {
@@ -33,7 +34,7 @@ class V1SessionRepository implements SessionRepositoryInterface
         if (is_null($session)) {
 
             throw new NotFoundHttpException('Session was not created');
-        }
+    }
 
         return $session;
     }
@@ -64,5 +65,23 @@ class V1SessionRepository implements SessionRepositoryInterface
             ->count();
 
         return $count;
+    }
+
+    /**
+     * @param string $token
+     * @return Model
+     */
+    public function getStuffIdByToken(string $token): Model
+    {
+        $session = V1Session::query()
+            ->where('access_token', $token)
+            ->first();
+
+        if (is_null($session)) {
+
+            throw new NotFoundHttpException('Session was not created');
+        }
+
+        return $session;
     }
 }

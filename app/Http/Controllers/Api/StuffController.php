@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api;
 
 use App\Api\Services\Contracts\StuffServiceInterface;
 use Illuminate\Http\Request;
-use Exception;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use \Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -35,14 +34,9 @@ class StuffController
 
             return response()->json($newStuff, 201);
         } catch (BadRequestHttpException $exception) {
-
             return response()->json($exception->getMessage(), 400);
         } catch (NotFoundHttpException $exception) {
-
             return response()->json($exception->getMessage(), 404);
-        } catch (Exception $exception) {
-
-            return response()->json($exception->getMessage(), 500);
         }
     }
 
@@ -59,11 +53,7 @@ class StuffController
 
             return response()->json($stuff, 200);
         } catch (NotFoundHttpException $exception) {
-
             return response()->json($exception->getMessage(), 404);
-        } catch (Exception $exception) {
-
-            return response()->json($exception->getMessage(), 500);
         }
     }
 }

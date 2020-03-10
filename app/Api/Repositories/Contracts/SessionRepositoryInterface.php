@@ -41,4 +41,10 @@ interface SessionRepositoryInterface
      * @return int
      */
     public function countByStuffId(int $id): int;
+
+    /**
+     * @param string $token
+     * @return Model
+     */
+    public function getStuffIdByToken(string $token): Model;
 }

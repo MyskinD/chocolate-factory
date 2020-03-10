@@ -23,10 +23,8 @@ class AuthController
 
             return response()->json($auth, 200);
         } catch (BadRequestHttpException $exception) {
-
             return response()->json($exception->getMessage(), 400);
         } catch (NotFoundHttpException $exception) {
-
             return response()->json($exception->getMessage(), 404);
         }
     }
