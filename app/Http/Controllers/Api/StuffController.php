@@ -47,6 +47,7 @@ class StuffController
     public function view(Request $request)
     {
         $id = $request->id;
+        var_dump($id);die;
 
         try {
             $stuff = $this->stuffService->get($id);

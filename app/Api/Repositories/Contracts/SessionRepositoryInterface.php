@@ -46,5 +46,5 @@ interface SessionRepositoryInterface
      * @param string $token
      * @return Model
      */
-    public function getStuffIdByToken(string $token): Model;
+    public function getStuffByToken(string $token = null): Model;
 }

@@ -30,11 +30,13 @@ class CheckToken
         $token = $request->headers->get('Authorization');
 
         try {
-            $this->sessionRepository->getStuffIdByToken($token);
+            $session = $this->sessionRepository->getStuffByToken($token);
+
+            var_dump($session);die;
 
             return $next($request);
         } catch(NotFoundHttpException $exception) {
-            return response()->json($exception->getMessage(), 404);
+            return response()->json($exception->getMessage(), 401);
         }
     }
 }

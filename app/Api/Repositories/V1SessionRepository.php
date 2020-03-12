@@ -31,11 +31,6 @@ class V1SessionRepository implements SessionRepositoryInterface
         $session->refresh_token = $data['refreshToken'];
         $session->save();
 
-        if (is_null($session)) {
-
-            throw new NotFoundHttpException('Session was not created');
-    }
-
         return $session;
     }
 
@@ -71,15 +66,18 @@ class V1SessionRepository implements SessionRepositoryInterface
      * @param string $token
      * @return Model
      */
-    public function getStuffIdByToken(string $token): Model
+    public function getStuffByToken(string $token = null): Model
     {
+        if (!$token) {
+            throw new NotFoundHttpException('Session was not found');
+        }
+
         $session = V1Session::query()
             ->where('access_token', $token)
             ->first();
 
         if (is_null($session)) {
-
-            throw new NotFoundHttpException('Session was not created');
+            throw new NotFoundHttpException('Session was not found');
         }
 
         return $session;

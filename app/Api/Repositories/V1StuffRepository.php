@@ -28,7 +28,6 @@ class V1StuffRepository implements StuffRepositoryInterface
             ->first();
 
         if (is_null($stuff)) {
-
             throw new NotFoundHttpException('Stuff was not found');
         }
 
@@ -50,7 +49,6 @@ class V1StuffRepository implements StuffRepositoryInterface
         $stuff->save();
 
         if (is_null($stuff)) {
-
             throw new NotFoundHttpException('Stuff was not created');
         }
 
@@ -89,7 +87,6 @@ class V1StuffRepository implements StuffRepositoryInterface
             ->first();
 
         if (is_null($stuff)) {
-
             throw new NotFoundHttpException('Stuff was not found');
         }
 
