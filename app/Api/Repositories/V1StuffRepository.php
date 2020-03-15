@@ -19,9 +19,9 @@ class V1StuffRepository implements StuffRepositoryInterface
 
     /**
      * @param int $id
-     * @return Model
+     * @return mixed
      */
-    public function get(int $id): Model
+    public function get(int $id)
     {
         $stuff = V1Stuff::query()
             ->where('id', $id)
@@ -36,9 +36,9 @@ class V1StuffRepository implements StuffRepositoryInterface
 
     /**
      * @param array $data
-     * @return Model
+     * @return mixed
      */
-    public function add(array $data): Model
+    public function add(array $data)
     {
         $stuff = new V1Stuff();
         $stuff->first_name = $data['first_name'];
@@ -77,9 +77,9 @@ class V1StuffRepository implements StuffRepositoryInterface
     /**
      * @param string $email
      * @param string $password
-     * @return Model
+     * @return mixed
      */
-    public function getStuffByEmailAndPassword(string $email, string $password): Model
+    public function getStuffByEmailAndPassword(string $email, string $password)
     {
         $stuff = V1Stuff::query()
             ->where('email', $email)

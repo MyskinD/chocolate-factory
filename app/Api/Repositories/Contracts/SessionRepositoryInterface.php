@@ -32,9 +32,13 @@ interface SessionRepositoryInterface
 
     /**
      * @param int $id
-     * @return mixed
      */
     public function removeByStuffId(int $id): void;
+
+    /**
+     * @param string $jwt
+     */
+    public function removeByJwt(string $jwt): void;
 
     /**
      * @param int $id
@@ -43,8 +47,8 @@ interface SessionRepositoryInterface
     public function countByStuffId(int $id): int;
 
     /**
-     * @param string $token
-     * @return Model
+     * @param string|null $jwt
+     * @return mixed
      */
-    public function getStuffByToken(string $token = null): Model;
+    public function getStuffByToken(string $jwt = null);
 }

@@ -3,6 +3,8 @@
 namespace App\Http\Middleware;
 
 use App\Api\Repositories\Contracts\SessionRepositoryInterface;
+use App\Api\Services\Contracts\AuthServiceInterface;
+use App\Api\Services\Contracts\JwtServiceInterface;
 use \Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Closure;
 
@@ -11,13 +13,20 @@ class CheckToken
     /** @var SessionRepositoryInterface  */
     protected $sessionRepository;
 
+    /** @var JwtServiceInterface  */
+    protected $jwtService;
+
     /**
      * CheckToken constructor.
      * @param SessionRepositoryInterface $sessionRepository
+     * @param JwtServiceInterface $jwtService
      */
-    public function __construct(SessionRepositoryInterface $sessionRepository)
-    {
+    public function __construct(
+        SessionRepositoryInterface $sessionRepository,
+        JwtServiceInterface $jwtService
+    ) {
         $this->sessionRepository = $sessionRepository;
+        $this->jwtService = $jwtService;
     }
 
     /**
@@ -27,12 +36,18 @@ class CheckToken
      */
     public function handle($request, Closure $next)
     {
-        $token = $request->headers->get('Authorization');
+        $jwt = $request->headers->get('Authorization');
 
         try {
-            $session = $this->sessionRepository->getStuffByToken($token);
+            $session = $this->sessionRepository->getStuffByToken($jwt);
+            $accessToken = $session->access_token;
+            $payload = $this->jwtService->decodingPayload($accessToken);
 
-            var_dump($session);die;
+            if (!$this->jwtService->checkTokenLifetime($payload->lifetime)) {
+                $this->sessionRepository->removeByJwt($jwt);
+
+                throw new NotFoundHttpException('Session was not found');
+            }
 
             return $next($request);
         } catch(NotFoundHttpException $exception) {

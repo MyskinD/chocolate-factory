@@ -77,8 +77,8 @@ class V1AuthService implements AuthServiceInterface
 
         return [
             'stuff' => $stuff,
-            'access_token' => $accessToken,
-            'refresh_token' => $refreshToken,
+            'accessToken' => $accessToken,
+            'refreshToken' => $refreshToken,
         ];
     }
 }

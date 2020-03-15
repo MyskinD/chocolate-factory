@@ -15,13 +15,13 @@ interface StuffRepositoryInterface
      * @param int $id
      * @return mixed
      */
-    public function get(int $id): Model;
+    public function get(int $id);
 
     /**
      * @param array $data
      * @return mixed
      */
-    public function add(array $data): Model;
+    public function add(array $data);
 
     /**
      * @param int $id
@@ -39,7 +39,7 @@ interface StuffRepositoryInterface
     /**
      * @param string $email
      * @param string $password
-     * @return Model
+     * @return mixed
      */
-    public function getStuffByEmailAndPassword(string $email, string $password): Model;
+    public function getStuffByEmailAndPassword(string $email, string $password);
 }

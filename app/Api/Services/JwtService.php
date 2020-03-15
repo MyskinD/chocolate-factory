@@ -7,6 +7,9 @@ use App\Api\Services\Contracts\JwtServiceInterface;
 
 class JwtService implements JwtServiceInterface
 {
+    /** @var int  */
+    const PAYLOAD = 1;
+
     /**
      * @param JwtDTO $dto
      * @return string
@@ -60,5 +63,30 @@ class JwtService implements JwtServiceInterface
         $signature = hash_hmac('SHA256', $header . "." . $payload, config('app.secret_key'), true);
 
         return base64_encode($signature);
+    }
+
+    /**
+     * @param string $accessToken
+     * @return mixed
+     */
+    public function decodingPayload(string $accessToken)
+    {
+        $payload = base64_decode(explode('.', $accessToken)[self::PAYLOAD]);
+
+        return  json_decode($payload);
+    }
+
+
+    /**
+     * @param string $lifetime
+     * @return bool
+     */
+    public function checkTokenLifetime(string $lifetime): bool
+    {
+        if ((int) $lifetime < time()) {
+            return false;
+        }
+
+        return true;
     }
 }
