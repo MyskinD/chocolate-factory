@@ -8,7 +8,13 @@ use App\Api\Services\Contracts\JwtServiceInterface;
 class JwtService implements JwtServiceInterface
 {
     /** @var int  */
+    const HEADER = 0;
+
+    /** @var int  */
     const PAYLOAD = 1;
+
+    /** @var int  */
+    const SIGNATURE = 2;
 
     /**
      * @param JwtDTO $dto
@@ -78,15 +84,36 @@ class JwtService implements JwtServiceInterface
 
 
     /**
-     * @param string $lifetime
+     * @param int $lifetime
      * @return bool
      */
-    public function checkTokenLifetime(string $lifetime): bool
+    public function isTokenExpired(int $lifetime): bool
     {
-        if ((int) $lifetime < time()) {
+        if ($lifetime < time()) {
             return false;
         }
 
         return true;
     }
+
+    /**
+     * @param string $accessToken
+     * @return bool
+     */
+    public function isTokenValid(string $accessToken): bool
+    {
+        $arrayOfAccessToken = explode('.', $accessToken);
+        $comeHeader = $arrayOfAccessToken[self::HEADER];
+        $comePayload = $arrayOfAccessToken[self::PAYLOAD];
+        $comeSignature = $arrayOfAccessToken[self::SIGNATURE];
+
+        $controlSignature = $this->getSignature($comeHeader, $comePayload);
+
+        if ($controlSignature !== $comeSignature) {
+            return false;
+        }
+
+        return true;
+    }
+
 }

@@ -52,7 +52,7 @@ class V1SessionRepository implements SessionRepositoryInterface
     /**
      * @param string $jwt
      */
-    public function removeByJwt(string $jwt): void
+    public function removeByToken(string $jwt): void
     {
         V1Session::query()
             ->where('access_token', $jwt)
@@ -73,17 +73,13 @@ class V1SessionRepository implements SessionRepositoryInterface
     }
 
     /**
-     * @param string|null $jwt
+     * @param string $accessToken
      * @return mixed
      */
-    public function getStuffByToken(string $jwt = null)
+    public function getStuffByToken(string $accessToken)
     {
-        if (!$jwt) {
-            throw new NotFoundHttpException('Session was not found');
-        }
-
         $session = V1Session::query()
-            ->where('access_token', $jwt)
+            ->where('access_token', $accessToken)
             ->first();
 
         if (is_null($session)) {

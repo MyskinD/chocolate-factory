@@ -19,8 +19,14 @@ interface JwtServiceInterface
     public function decodingPayload(string $accessToken);
 
     /**
-     * @param string $lifetime
+     * @param int $lifetime
      * @return bool
      */
-    public function checkTokenLifetime(string $lifetime): bool;
+    public function isTokenExpired(int $lifetime): bool;
+
+    /**
+     * @param string $accessToken
+     * @return bool
+     */
+    public function isTokenValid(string $accessToken): bool;
 }

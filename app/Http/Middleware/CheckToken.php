@@ -39,14 +39,22 @@ class CheckToken
         $jwt = $request->headers->get('Authorization');
 
         try {
+            if (!$jwt) {
+                throw new NotFoundHttpException('Session was not found');
+            }
+
+            if (!$this->jwtService->isTokenValid($jwt)) {
+                throw new NotFoundHttpException('Token is not valid');
+            }
+
             $session = $this->sessionRepository->getStuffByToken($jwt);
             $accessToken = $session->access_token;
             $payload = $this->jwtService->decodingPayload($accessToken);
 
-            if (!$this->jwtService->checkTokenLifetime($payload->lifetime)) {
-                $this->sessionRepository->removeByJwt($jwt);
+            if (!$this->jwtService->isTokenExpired((int) $payload->lifetime)) {
+                $this->sessionRepository->removeByToken($jwt);
 
-                throw new NotFoundHttpException('Session was not found');
+                throw new NotFoundHttpException('Token is not expired');
             }
 
             return $next($request);

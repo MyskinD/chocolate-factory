@@ -38,7 +38,7 @@ interface SessionRepositoryInterface
     /**
      * @param string $jwt
      */
-    public function removeByJwt(string $jwt): void;
+    public function removeByToken(string $jwt): void;
 
     /**
      * @param int $id
@@ -47,8 +47,8 @@ interface SessionRepositoryInterface
     public function countByStuffId(int $id): int;
 
     /**
-     * @param string|null $jwt
+     * @param string $accessToken
      * @return mixed
      */
-    public function getStuffByToken(string $jwt = null);
+    public function getStuffByToken(string $accessToken);
 }
