@@ -2,10 +2,10 @@
 
 namespace App\Api\Services;
 
-use App\Api\Models\StuffInterface;
-use App\Api\Repositories\StuffRepositoryInterface;
+use App\Api\Repositories\Contracts\StuffRepositoryInterface;
+use App\Api\Services\Contracts\StuffServiceInterface;
 use App\Api\Validations\StuffValidation;
-use \Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Illuminate\Database\Eloquent\Model;
 
 class V1StuffService implements StuffServiceInterface
 {
@@ -16,7 +16,7 @@ class V1StuffService implements StuffServiceInterface
     protected $stuffValidation;
 
     /**
-     * StuffService constructor.
+     * V1StuffService constructor.
      * @param StuffValidation $stuffValidation
      * @param StuffRepositoryInterface $stuffRepository
      */
@@ -30,25 +30,22 @@ class V1StuffService implements StuffServiceInterface
 
     /**
      * @param array $data
-     * @return StuffInterface
+     * @return Model
      */
-    public function create(array $data): StuffInterface
+    public function create(array $data): Model
     {
         $this->stuffValidation->validateOnCreate($data);
+        $data['password'] = md5($data['password']);
         $newStuff = $this->stuffRepository->add($data);
-
-        if (is_null($newStuff)) {
-            throw new NotFoundHttpException('Stuff was not created');
-        }
 
         return $newStuff;
     }
 
     /**
      * @param int $id
-     * @return StuffInterface
+     * @return Model
      */
-    public function get(int $id): StuffInterface
+    public function get(int $id): Model
     {
         $stuff = $this->stuffRepository->get($id);
 

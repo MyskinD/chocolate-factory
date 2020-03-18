@@ -121,6 +121,12 @@ return [
 
     'key' => env('APP_KEY'),
 
+    'secret_key' => env('SECRET_KEY'),
+
+    'access_token_lifetime' => time() + env('ACCESS_TOKEN_LIFETIME'),
+
+    'refresh_token_lifetime' => time() + env('REFRESH_TOKEN_LIFETIME'),
+
     'cipher' => 'AES-256-CBC',
 
     /*

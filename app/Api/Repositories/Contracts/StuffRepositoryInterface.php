@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Api\Repositories;
+namespace App\Api\Repositories\Contracts;
 
-use App\Api\Models\StuffInterface;
+use Illuminate\Database\Eloquent\Model;
 
 interface StuffRepositoryInterface
 {
@@ -21,7 +21,7 @@ interface StuffRepositoryInterface
      * @param array $data
      * @return mixed
      */
-    public function add(array $data): StuffInterface;
+    public function add(array $data);
 
     /**
      * @param int $id
@@ -34,5 +34,12 @@ interface StuffRepositoryInterface
      * @param int $id
      * @return mixed
      */
-    public function remove(int $id);
+    public function remove(int $id): void;
+
+    /**
+     * @param string $email
+     * @param string $password
+     * @return mixed
+     */
+    public function getStuffByEmailAndPassword(string $email, string $password);
 }
